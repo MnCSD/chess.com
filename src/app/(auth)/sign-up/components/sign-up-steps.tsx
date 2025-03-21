@@ -22,8 +22,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { FormError } from "../../login/components/form-error";
-import { signIn } from "@/auth";
-import { DEFAULT_LOGIN_REDIRECT } from "../../../../../routes";
 
 export const SignUpSteps = () => {
   const searchParams = useSearchParams();
@@ -61,6 +59,8 @@ export const SignUpSteps = () => {
         setSuccess(data.success);
       });
     });
+
+    router.push("/login");
   };
 
   if (!step) {
@@ -78,7 +78,7 @@ export const SignUpSteps = () => {
           type="button"
           variant={"main"}
           className="w-full py-8 border-b-5 border-[#45753c] cursor-pointer rounded-lg text-2xl font-bold mt-4 "
-          onClick={() => handlePress("skill-level")}
+          onClick={() => handlePress("login-info")}
         >
           Sign Up
         </Button>

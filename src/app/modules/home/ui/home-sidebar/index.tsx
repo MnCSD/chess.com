@@ -8,6 +8,7 @@ import { PersonalSection } from "./personal-section";
 import { BottomSection } from "./bottom-section";
 import { cn } from "@/lib/utils";
 import { XIcon } from "lucide-react";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 interface HomeSidebarProps {
   isMobile?: boolean;
@@ -20,6 +21,8 @@ export const HomeSidebar = ({
   open,
   setIsOpen,
 }: HomeSidebarProps) => {
+  const user = useCurrentUser();
+
   return (
     <nav
       className={cn(

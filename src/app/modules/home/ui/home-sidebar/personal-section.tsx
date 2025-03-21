@@ -4,12 +4,14 @@ import { Button } from "@/components/ui/button";
 import { LogInIcon, SearchIcon, UserPlus2Icon } from "lucide-react";
 import React from "react";
 import { AuthButton } from "../components/auth-buttons";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 interface PersonalSectionProps {
   isMobile?: boolean;
 }
 
 export const PersonalSection = ({ isMobile = false }: PersonalSectionProps) => {
+  const user = useCurrentUser();
   const isMobilePersonal = isMobile;
 
   return (
@@ -24,7 +26,11 @@ export const PersonalSection = ({ isMobile = false }: PersonalSectionProps) => {
         <SearchIcon className="size-5 text-white" strokeWidth={4} />
       </div>
 
-      {!isMobile ? <AuthButton isMobilePersonal /> : <AuthButton />}
+      {!isMobile ? (
+        <>{!user && <AuthButton isMobilePersonal />}</>
+      ) : (
+        <>{!user && <AuthButton />}</>
+      )}
     </div>
   );
 };

@@ -41,14 +41,16 @@ export const LoginForm = () => {
 
     startTransition(() => {
       login(values).then((data) => {
-        setError(data.error);
-        setSuccess(data.success);
+        if (data) {
+          setError(data.error);
+          setSuccess(data.success);
+        }
       });
     });
   };
 
   return (
-    <div className="bg-sidebar max-w-full w-[400px] rounded-lg ">
+    <div className="">
       <div className="p-8">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -118,20 +120,6 @@ export const LoginForm = () => {
             </div>
           </form>
         </Form>
-
-        <div className="mt-14 w-full ">
-          <SocialButtons />
-        </div>
-      </div>
-
-      <div className="bg-black/30 py-5 px-8 rounded-b-lg flex items-center justify-center">
-        <Link
-          prefetch
-          href="/sign-up"
-          className="text-muted/70 text-[14px] font-semibold"
-        >
-          New? Sign up - and start playing chess
-        </Link>
       </div>
     </div>
   );
