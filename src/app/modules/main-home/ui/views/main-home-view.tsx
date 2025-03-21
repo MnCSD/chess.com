@@ -4,6 +4,7 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import React from "react";
 import { UserInfoSection } from "../sections/user-info-section";
 import { GamesSection } from "../sections/games-section";
+import { HistorySection } from "../sections/history-section";
 
 export const MainHomeView = () => {
   const user = useCurrentUser();
@@ -15,6 +16,8 @@ export const MainHomeView = () => {
       <UserInfoSection user={user} />
 
       <GamesSection />
+
+      <HistorySection user={user} />
     </div>
   );
 };

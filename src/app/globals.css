@@ -152,3 +152,41 @@
   margin-inline-end: 1rem;
   width: 2.2rem;
 }
+
+
+.board {
+  width: calc( ( ( ( (max(26.4rem, min(min(100dvw - 14.5rem - 1.2rem - 1.6rem - calc(1.6rem * 2) - 1rem - 3rem - 30rem - calc(30rem + 1.6rem) - 0rem - 0rem, 100dvw - 14.5rem - 1.2rem - 1.6rem - calc(1.6rem * 2) - 1rem - 3rem - 30rem - calc(30rem + 1.6rem) - 0rem - 0rem), (100dvh - 0rem - 0rem - calc(4rem * 2) - 1.6rem - 1.6rem - 1rem - 1rem - 0rem - 0rem) / 1)) / 8) - (.05rem - 1e-10rem)) * 4.9406564584124654e-324 ) / 4.9406564584124654e-324 ) * 8 )
+}
+
+.coordinate-light {
+  fill: #739552;
+  font-weight: 500;
+}
+
+.coordinate-dark {
+  fill: #EBECD0;
+  font-weight: 500;
+}
+
+.coordinates {
+  left: 0;
+  position: absolute;
+  top: 0;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.piece {
+  background-size: 100%;
+  cursor: grab;
+  cursor: -webkit-grab;
+  height: 12.5%;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  touch-action: none;
+  width: 12.5%;
+  will-change: transform;
+}
