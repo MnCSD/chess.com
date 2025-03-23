@@ -2,6 +2,7 @@ import Knight from "./icons/knight";
 import Pawn from "./icons/pawn";
 import Queen from "./icons/queen";
 import Rook from "./icons/rook";
+import { BoardState } from "./types";
 
 export const levels = [
   {
@@ -287,3 +288,60 @@ export const chessPieces = [
     initialY: 700,
   },
 ] as const;
+
+export const initialBoardState: BoardState = chessPieces.reduce(
+  (acc, piece) => {
+    acc[piece.id] = {
+      x: piece.initialX,
+      y: piece.initialY,
+      type: piece.type,
+      color: piece.color,
+    };
+    return acc;
+  },
+  {} as BoardState
+);
+
+export const pieces = [
+  "wP",
+  "wN",
+  "wB",
+  "wR",
+  "wQ",
+  "wK",
+  "bP",
+  "bN",
+  "bB",
+  "bR",
+  "bQ",
+  "bK",
+];
+
+export const bots = {
+  beginner: [
+    {
+      id: 1,
+      name: "Martin",
+      level: 1,
+      image: "/martin.png",
+      country: "BG",
+      elo: "250",
+    },
+    {
+      id: 2,
+      name: "Juan",
+      level: 2,
+      image: "/juan.png",
+      country: "PL",
+      elo: "400",
+    },
+    {
+      id: 3,
+      name: "Milica",
+      level: 3,
+      image: "/milica.png",
+      country: "RS",
+      elo: "550",
+    },
+  ],
+};

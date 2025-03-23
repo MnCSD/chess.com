@@ -3,6 +3,8 @@
 import React, { useRef, useState, useCallback } from "react";
 import Coordinates from "./coordinates";
 import { chessPieces } from "@/constants";
+import { BoardState } from "@/types";
+import { isValidMove } from "@/lib/utils";
 
 interface ChessBoardProps {
   type: "view" | "play";
@@ -12,6 +14,20 @@ export const ChessBoard = ({ type }: ChessBoardProps) => {
   const boardRef = useRef<HTMLDivElement | null>(null);
   const pieceRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
   const [draggingPiece, setDraggingPiece] = useState<string | null>(null);
+  const BoardState: BoardState = chessPieces.reduce((acc, piece) => {
+    acc[piece.id] = {
+      x: piece.initialX,
+      y: piece.initialY,
+      type: piece.type,
+      color: piece.color,
+    };
+    return acc;
+  }, {} as BoardState);
+
+  const [positionBeforeMove, setPositionBeforeMove] = useState<{
+    x: number;
+    y: number;
+  } | null>(null);
   const [positions, setPositions] = useState(
     chessPieces.reduce(
       (acc, piece) => ({
@@ -41,6 +57,9 @@ export const ChessBoard = ({ type }: ChessBoardProps) => {
         const offsetY = e.clientY - boardRect.top - positions[id].y;
         setOffset({ x: offsetX, y: offsetY });
         setDraggingPiece(id);
+
+        // get the piece position before move starts but every time a piece is clicked
+        setPositionBeforeMove({ x: positions[id].x, y: positions[id].y });
       }
     },
     [positions]
@@ -87,6 +106,22 @@ export const ChessBoard = ({ type }: ChessBoardProps) => {
     if (draggingPiece && hoveredTile) {
       const snappedX = hoveredTile.col * 100;
       const snappedY = hoveredTile.row * 100;
+
+      const isValid = isValidMove(
+        chessPieces.find((piece) => piece.id === draggingPiece)?.type as
+          | "rook"
+          | "knight"
+          | "bishop"
+          | "queen"
+          | "king"
+          | "pawn",
+        chessPieces.find((p) => p.id === draggingPiece)?.color as
+          | "black"
+          | "white",
+        { row: positionBeforeMove?.y || 0, col: positionBeforeMove?.x || 0 },
+        { row: snappedX, col: snappedY },
+        BoardState
+      );
 
       setPositions((prev) => ({
         ...prev,

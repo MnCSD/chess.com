@@ -4,6 +4,7 @@ export interface Position {
 }
 
 export interface ChessPiece {
+  position: any;
   id: string;
   type: "pawn" | "rook" | "knight" | "bishop" | "queen" | "king";
   color: "white" | "black";
@@ -14,7 +15,9 @@ export interface ChessPiece {
 
 export interface BoardState {
   [key: string]: {
-    position: Position;
-    isFirstMove: boolean;
+    x: number;
+    y: number;
+    type: string;
+    color: string;
   };
 }
